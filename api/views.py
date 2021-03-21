@@ -28,6 +28,8 @@ class CityDetails:
 		# query parameter :qp
 		qp = request.GET.get('station')
 		# fetch data from csv
+		if not qp:
+			return HttpResponse('<h1>Nothing to search.</h1>')
 		data = CityDetails.ViewData(request,qp)
 
 		for i in data:
@@ -37,6 +39,7 @@ class CityDetails:
 			else:
 				#throw err
 				pass
+				
 		return HttpResponse(station_details)
 
 	def Distance(request):
@@ -71,12 +74,7 @@ class CityDetails:
 			
 			# else:
 				# do something
-				
-
-			
+				# Err: 404
 			if a and b:
 				return HttpResponse('<h1>Distance between {} and {} is : {} km </h1>'.format(_from,_to,abs(float(a)-float(b))))
-			# else:
-			# 	return HttpResponse('<h1>Err</h1>{}{}'.format(a,b))
-	
-		
+			
